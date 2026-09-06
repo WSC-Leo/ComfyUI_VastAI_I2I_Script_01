@@ -1,6 +1,5 @@
 #!/bin/bash
 # ============================================================================
-#!/bin/bash
 # provisioning_script for Character Dataset Generation (FLUX + PuLID + Redux)
 # ใช้กับ Vast.ai ผ่าน PROVISIONING_SCRIPT
 # ============================================================================
@@ -72,12 +71,12 @@ download_if_missing \
   "https://huggingface.co/guozinan/PuLID/resolve/main/pulid_flux_v0.9.1.safetensors" \
   "$MODELS_DIR/pulid/pulid_flux_v0.9.1.safetensors"
 # ----------------------------------------------------------------------------
-# ส่วนที่ 5: FLUX Redux —> pulid_flux_v0.9.1.safetensors
+# ส่วนที่ 5: FLUX Redux —> flux1-redux-dev.safetensors
 download_if_missing \
   "https://huggingface.co/black-forest-labs/FLUX.1-Redux-dev/resolve/main/flux1-redux-dev.safetensors" \
   "$MODELS_DIR/style_models/flux1-redux-dev.safetensors"
 # ----------------------------------------------------------------------------
-# ส่วนที่ 6: SigCLIP Vision (สำหรับ Redux) —> pulid_flux_v0.9.1.safetensors
+# ส่วนที่ 6: SigCLIP Vision (สำหรับ Redux) —> sigclip_vision_patch14_384.safetensors
 download_if_missing \
   "https://huggingface.co/Comfy-Org/sigclip_vision_384/resolve/main/sigclip_vision_patch14_384.safetensors" \
   "$MODELS_DIR/clip_vision/sigclip_vision_patch14_384.safetensors"
