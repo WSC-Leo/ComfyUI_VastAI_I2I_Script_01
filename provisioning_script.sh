@@ -1,9 +1,9 @@
 #!/bin/bash
 # ============================================================================
-# provisioning_ace_step_xl.sh
+# provisioning_scriptFLUX.sh
 # ใช้กับ Vast.AI ผ่าน environment variable "PROVISIONING_SCRIPT"
-# โหลดโมเดล ACE-Step 1.5 XL (turbo) + text encoder + VAE + workflow + custom
-# node ที่จำเป็น สำหรับสร้างเพลง Lofi/Piano ลง YouTube
+# โหลดโมเดล Flux1 + text encoder + VAE + PuLID + style_models + clip_vision + workflow + custom node ที่จำเป็น 
+# สำหรับสร้างDataset Character สำหรับไว้ Train LoRAs
 # ไม่ต้องใช้ HF_TOKEN — repo นี้ไม่ gated
 # ============================================================================
 
@@ -13,7 +13,7 @@ set -eo pipefail
 # ส่วนที่ 0: หา path จริงของ ComfyUI บนเครื่องนี้
 # ----------------------------------------------------------------------------
 echo ">>> กำลังค้นหาโฟลเดอร์ ComfyUI บนเครื่องนี้..."
-COMFY_DIR=$(find / -maxdepth 5 -iname "ComfyUI" -type d 2>/dev/null | head -n 1)
+COMFY_DIR=$(find / -maxdepth 5 -iname "ComfyUI" -type d 2>/dev/null -print -quit)
 
 if [ -z "$COMFY_DIR" ]; then
   COMFY_DIR="/workspace/ComfyUI"
@@ -90,7 +90,7 @@ download_if_missing \
   "$MODELS_DIR/clip_vision/sigclip_vision_patch14_384.safetensors"
 
 # ----------------------------------------------------------------------------
-# ส่วนที่ 4: ติดตั้ง Custom Node ที่จำเป็นสำหรับ ACE-Step ใน ComfyUI
+# ส่วนที่ 7: ติดตั้ง Custom Node ที่จำเป็นสำหรับ ACE-Step ใน ComfyUI
 # ----------------------------------------------------------------------------
 CUSTOM_NODES_DIR="$COMFY_DIR/custom_nodes"
 
@@ -107,7 +107,7 @@ else
 fi
 
 # ----------------------------------------------------------------------------
-# ส่วนที่ 5: โหลด Workflow ตัวอย่าง (text-to-music พื้นฐาน)
+# ส่วนที่ 8: โหลด Workflow ตัวอย่าง (text-to-music พื้นฐาน)
 # ----------------------------------------------------------------------------
 download_if_missing \
   "https://raw.githubusercontent.com/ryanontheinside/ComfyUI_RyanOnTheInside/main/examples/ace1.5/audio_ace_step_1_5_cover.json" \
